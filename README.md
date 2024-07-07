@@ -1,7 +1,7 @@
 # SHIELD-Summer-School
 SHIELD Summer School Activity Repository 
 
-The SHIELD Summer School, titled “Plasma Processes at the Edge of the Solar System”: The summer school was an intensive one-week course in the most challenging plasma processes that drive the structure and dynamics at the Edge of the Solar System.
+The SHIELD Summer School, titled “Plasma Processes at the Edge of the Solar System” (https://shielddrivecenter.com/shield-summer-school/): The summer school was an intensive one-week course in the most challenging plasma processes that drive the structure and dynamics at the Edge of the Solar System.
 
 During the SHIELD Summer School participants experience lectures from leading research scientists working in the outer heliosphere covering plasma processes that are important in understanding the structure of the heliosphere.  Participants also engage in activities that explore data from important missions such as  Voyager, New Horizons, and IBEX, as well as simulation results exploring magnetic reconnection. 
 
@@ -12,8 +12,10 @@ The overall learning goals activities include:
   - Understanding plasma processes such as magnetic reconnection and turbulence 
   - Being able to see the signatures of these processes in the spacecraft data
 
+Each notebook is broken into small code blocks seperated by explaination and questions.  The questions are intended to prompt exploration.  If you are working on these activities with others then you should discuss your reasoning when answering the questions. If you are working on your own, take the time to write out your results and explainations. 
+
 The following activities are (or will be) available in this repository:
-  1) Structures at the edge of the heliosphere - Participants use plots of Voyager data to identify key regions of the outer heliosphere. This activity consists of several files including a lab manual, PDF’s of data plots, and a Colab Notebook.  (Future iterations of this activity will have just one self contained notebook.  
+  1) Structures at the edge of the heliosphere - Participants use plots of Voyager 2 plasma data to identify key regions of the outer heliosphere. This activity is presented in two seperate notebooks. The first explores the different regions of the outer heliosphere and the second takes a detailed look at the pressure balance and jump conditions at the termination shock.
 
   2) Variation of the solar wind in the outer heliosphere - Participants use New Horizons data to explore the variation in density, velocity, and temperature of the solar wind in the outer heliosphere. The activity also allows participants to review the thermal particle energy spectrum measured by NH. (Only one file is required.)
 
