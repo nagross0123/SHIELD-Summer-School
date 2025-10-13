@@ -1,1 +1,10 @@
 This folder contains the lecture slides and activities from Day 4 of the Summer School.
+The day 4 topic was measurement and interpretation of Energetic Neutral Atoms (ENA's) detected by the IBEX spacecraft. 
+The IMAP spacecraft was also discussed
+
+There is one file and one folder here 
+The file, "ENAs_SHIELD_School_2025_Dayeh.pdf", contains lecture slides from Maher Dayeh on Energetic Neutrals 
+and their measurement by the IBEX and IMAP spacecraft.
+
+The folder contains the Python Notebooks and supporting code for an activity exploring the IBEX data. 
+The activity will also need IBEX data from Data Release 17 and 18 in this repository (https://ibex.princeton.edu/DataRelease).
