@@ -1,5 +1,0 @@
-Exploring the Heliosphere Structure and the Pressure Balance at the Termination Shock
-
-This activity is broken into two parts in two separate files.
-- Heliosphere_Overview: This notebook allows users to explore Voyager 2 plasma data and identify different regions of the outer heliosphere - solar wind, termination shock, heliosheath, heliopause, and the interstellar medium
-- Termination Shock (V2): In this notebook, users focus on the pressure balance and jump conditions at the termination shock. (V2 changed how the notebook access the data)
