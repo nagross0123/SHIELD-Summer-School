@@ -8,3 +8,4 @@ and their measurement by the IBEX and IMAP spacecraft.
 
 The folder contains the Python Notebooks and supporting code for an activity exploring the IBEX data. 
 The activity will also need IBEX data from Data Release 17 and 18 in this repository (https://ibex.princeton.edu/DataRelease).
+See the notebooks for detailed instructions for downloading and organizing the data. 
