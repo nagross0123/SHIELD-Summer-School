@@ -1,0 +1,118 @@
+# SkyMaps
+
+author: Jonathan Gasser, Southwest Research Institute <br>
+version: v2.1 (2024-10-30)
+
+## Overview
+
+This set of Python routines is to plot global imaging maps in Mollweide projection in arbitrary orientation.
+It is focused on plotting ENA maps, but can be applied to any data set available as 2D pixel coordinates & values.
+For example, this allows to view celestial images maps given in ecliptic coordinates to be plotted in different celestial coordinate systems without having to reprocess (rebinning) the dataset itself.
+This is based on the **matplotlib.pyplot** package.
+
+Additional features include:
+- added lattice grid of the data's coordinate system, with appropriate coordinate ticks labels
+- added colorbar, with any available colormap
+- fully customizable titles, axes labels, fonts, color schemes, linestyle
+- added custom points, lines, and text elements on top of the mapped image *(to be completed)*
+- predefined orientations for ENA maps by keyword
+
+
+## Getting Started
+
+> **Quick start**
+> - copy this folder in a local directory on your computer
+> - open the file `ibex_data.json` in a text editor
+> - adjust the paths 'path_ibex_lo', 'path_ibex_hi', 'file0_ibex_hi', 'file0_ibex_lo' to match the directory where IBEX data from data release are stored on your system.
+> - open and run the file `run_map_rotated.py`. It should save an example PNG file in the same folder where the script is stored.
+
+The user will mostly need to call some function from `loadibex.py` and the **`map_rotated.plot_rotated_map()`** function with appropriate arguments for their application.
+
+### Arguments of the Main function `map_rotated.plot_rotated_map()`
+
+**Necessary arguments:**
+- `lons`: a (n+1) array containing the map's pixel edges in ecliptic longitude coordinates in deg
+- `lats`: a (m+1) array  containing the map's pixel edges in ecliptic latitude coordinates in deg
+- `data`: a (m, n) 2D array containing the data values to be mapped. Can contain float values and np.nan (which will be ignored from plotting)
+
+> Note:<br>
+> The applied coordinate transformation from ecliptic coordinates (lon,lat) to 'map view' coordinates (ra, dec) is a sequence of three rotations R_k(Q) by angle Q about axis k:<br>
+>      (ra, dec) = R_z(th) * R_y(alf) * R_z(-phi) * (lon,lat)<br>
+> For `th=0` this brings the point *(lon,lat)=(phi,alf)* to the map center; the ecliptic pole is then on the vertical center line of the map.<br>
+> With *th* nonzero, we can horizontally shift the ecliptic pole (and the map) by any angle.
+
+**Keyword arguments (and default values):**
+- `alf=5` : polar rotation angle "alpha" in deg (from -90 to +90 deg). If "theta"=0 (see below), this corresponds to the ecliptic latitude that will be placed at the map center.
+- `phi=255` : azimuthal rotation angle "phi" in deg (from -360 to +360 deg). If "theta"=0 (see below), this corresponds to the ecliptic longitude that will be placed at the map center.
+- `th=0` : 'final' rotation angle "theta" in deg  (from -360 to +360 deg): this rotates the map about the *map view pole* after the other rotations have been
+- `orientation_kw=None` : string from {'ecl','nose','tail','ribbon','ribbon_c'}: allows to plot maps in predefined orientation (ecliptic standard, nose-centered, etc.) This overrides any given angle parameters.
+- `center_meridian=False` : boolean, if True, *th* will be interpreted as the ecliptic longitude meridian where the map center should be.
+- (further keyword arguments for the plot layout: see below)
+
+**Plot keyword arguments *kwargs_plot*:**
+- `figsize=(24,16)` : total figure size (horizontal, vertical)
+- `axes=None` : axes object to plot into. Default: a new figure and Mollweide axes will be generated.
+- `title` : plot title
+- `xlabel` : longitude axis label
+- `ylabel` : latitude axis label
+- `clabel` : colorbar label
+- `lon_ticks` : (list or 1D array) longitude tick values in deg
+- `lat_ticks` : (list or 1D array) latitude tick values in deg
+- `lon_ticklabel_offset=(3.5,1.5)` : offset values in deg for longitude ticklabel text
+- `lat_ticklabel_offset` : offset values in deg for latitude ticklabel text
+- `title_font=50` : fontsize of title
+- `label_font=30` : fontsize of axis labels
+- `tick_font=20` : fontsize of axis ticks
+- `font_scale=1` : scale factor for all font sizes
+- `face_color='lightgray'` : color of the Mollweide background
+- `grid_color=[.4,.4,.4]` : color of the grid lines
+- `grid_on=True` : boolean show the grid?
+- `cbar_on=True` : boolean show the colorbar?
+- `cmap=None` : colormap for the plot. Default: matplotlib.pyplot.cm.turbo
+- `cmap_bad=[0,0,0,0]` : rgba values for NAN values
+- `cmap_under=[0,0,0,1]` : rgba values for data values below lower cbar limit
+- `cmap_over=[1,1,1,1]` : rgba values for data values above upper cbar limit
+- `vmin=None` : colorbar lower limit (default: data minimum or zero)
+- `vmax=None` : colorbar upper limit (default: data maximum)
+- `cnorm=False` : boolean normalize the colorbar to [0,1]? vmin, vmax ignored
+- `cbar_kwargs={}` : dict of keywords & values for colorbar (see matplotlib.pyplot.colorbar)
+
+## Classes and Functions
+
+> **run_map_rotated.py**
+> This is a standalone quickstart script that loads some IBEX map and makes a rotated map plot.
+
+
+> **map_rotated.py**
+> - `def plot_rotated_map()`: the **MAIN** function that does the coordinate computing and calls the plot.
+> - `def draw_mollweide_map()`: the actual plotting function with all plot specs applied.
+> - `def add_grid_patch()`: helper function for the coordinate grid.
+> - `def cast_into_360range()`: helper function to deal with cyclicity of angles.
+> - `def insert_coordinate()`: helper function for mapping rotated imaging maps.
+> - `def orientate_map()`: helper function, define rotation angles based on keywords.
+
+
+> **loadibex.py**
+> essentially a set of data loading and parsing functions:
+> - `def load_json()`
+> - `def load_ibexfile()`
+> - `def load_ibexfile_std()`
+> - `def load_combifile()`
+> - `def load_incafile()`
+> - `def load_incafile_yearly()`
+> - `def load_sokolfile()`
+
+> **SphereRotate.py**
+> - `def sphereRotate()`: function that applies polar rotation to a set of coordinates
+> - `class SpherePolarRotate(trf.Transform)`: a Transform.class definition for polar rotation
+> - `class SphereAziRotate(trf.Transform)`: a Transform.class definition for azimuthal rotation (about polar axis)
+> - `class CastModulo(trf.Transform)`: a Transform.class definition that casts coordinates into a selected range (e.g., 0-360 deg).
+
+
+> **ibex_coords.json**
+> a dictionary for ecliptic coordinates to specific directions of interest (e.g., nose, galactic pole, ribbon center,...).
+
+> **ibex_data.json**
+> a dictionary to keep the folder and file paths to IBEX (&other) data.
+
+----------------------
