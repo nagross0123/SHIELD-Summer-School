@@ -21,4 +21,5 @@ The following activities are (or will be) available in this repository:
 
   3) Reconnection Simulation Results - Exploring the structure of reconnection and the impact on kinetics of the plasma particles. (This requires both the Colab Notebook and the accompanying data files with simulation results.) 
 
-4) Turbulence - This activity allows participants to explore turbulence in the solar wind by calculating the power spectrum of the magnetic field components. Results are compared to power laws derived from standard theories of turbulence.  (Only one file is required.)
+  4) Day 4 is devoted to measuring and analyzing ENA data.
+  5) Day 5: Impacts of heliosphere bubble. 
